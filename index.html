@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>:3</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: black;
+      color: white;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      overflow: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 0;
+    }
+    #treeCanvas { opacity: 0.2; }
+    #starsCanvas { opacity: 0.3; } 
+    #trailCanvas { pointer-events: none; }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      animation: fadeIn 1.5s ease forwards;
+    }
+    .line {
+      width: 80px;
+      height: 3px;
+      background: white;
+      margin: 1rem auto;
+      animation: growLine 1.8s ease forwards;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 2s ease forwards;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    .skills span {
+      background: rgba(255,255,255,0.08);
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.95rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    .skills span:nth-child(1) { animation-delay: 0.3s; }
+    .skills span:nth-child(2) { animation-delay: 0.6s; }
+    .skills span:nth-child(3) { animation-delay: 0.9s; }
+    .skills span:nth-child(4) { animation-delay: 1.2s; }
+    .skills span:nth-child(5) { animation-delay: 1.5s; }
+    .skills span:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-3px);
+    }
+
+    .contact a {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 30px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+      transition: all 0.3s ease;
+    }
+    .contact a:hover {
+      background: #ccc;
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes growLine {
+      from { width: 0; }
+      to { width: 80px; }
+    }
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+  animation: fadeInUp 3s ease forwards;
+}
+.buttons a {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 30px;
+  background: white;
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  transition: all 0.3s ease;
+}
+.buttons a:hover {
+  background: #ccc;
+  box-shadow: 0 0 20px rgba(255,255,255,0.8);
+  transform: scale(1.05);
+}
+
+  </style>
+</head>
+<body>
+  <canvas id="starsCanvas"></canvas>
+  <canvas id="treeCanvas"></canvas>
+  <canvas id="trailCanvas"></canvas>
+
+<div class="content">
+  <h1>Aura</h1>
+  <div class="line"></div>
+  <p>Languages I Use</p>
+  <div class="skills">
+    <span>Python</span>
+    <span>Luau</span>
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>JavaScript</span>
+  </div>
+  <div class="buttons">
+    <a href="https://discord.com/users/1393669335280517331" target="_blank">Contact Me</a>
+    <a href="https://github.com/FlamesIsCool" target="_blank">GitHub</a>
+  </div>
+</div>
+
+
+  <script>
+    /* ---------- starssss ---------- */
+    const starsCanvas = document.getElementById("starsCanvas");
+    const sctx = starsCanvas.getContext("2d");
+    starsCanvas.width = window.innerWidth;
+    starsCanvas.height = window.innerHeight;
+
+    let stars = [];
+    for (let i = 0; i < 150; i++) {
+      stars.push({
+        x: Math.random() * starsCanvas.width,
+        y: Math.random() * starsCanvas.height,
+        size: Math.random() * 2,
+        alpha: Math.random()
+      });
+    }
+    function animateStars() {
+      sctx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+      stars.forEach(star => {
+        star.alpha += (Math.random() - 0.5) * 0.05;
+        star.alpha = Math.max(0.2, Math.min(1, star.alpha));
+        sctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+        sctx.fillRect(star.x, star.y, star.size, star.size);
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    /* ---------- treeee ---------- */
+    const treeCanvas = document.getElementById("treeCanvas");
+    const ctx = treeCanvas.getContext("2d");
+    treeCanvas.width = window.innerWidth;
+    treeCanvas.height = window.innerHeight;
+
+    function drawBranch(x, y, length, angle, depth, sway) {
+      if (depth === 0) return;
+      const wind = Math.sin(Date.now() * 0.001 + sway) * 0.1;
+      const newAngle = angle + wind;
+      const xEnd = x + Math.cos(newAngle) * length;
+      const yEnd = y + Math.sin(newAngle) * length;
+      ctx.lineWidth = depth;
+      ctx.strokeStyle = "white";
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(xEnd, yEnd);
+      ctx.stroke();
+      drawBranch(xEnd, yEnd, length * 0.7, newAngle - 0.4, depth - 1, sway + 1);
+      drawBranch(xEnd, yEnd, length * 0.7, newAngle + 0.4, depth - 1, sway + 2);
+    }
+    function animateTree() {
+      ctx.clearRect(0, 0, treeCanvas.width, treeCanvas.height);
+      drawBranch(treeCanvas.width / 2, treeCanvas.height, 120, -Math.PI / 2, 10, 0);
+      requestAnimationFrame(animateTree);
+    }
+    animateTree();
+
+    /* ---------- mouse trail dudz ---------- */
+    const trailCanvas = document.getElementById("trailCanvas");
+    const tctx = trailCanvas.getContext("2d");
+    trailCanvas.width = window.innerWidth;
+    trailCanvas.height = window.innerHeight;
+
+    let particles = [];
+    document.addEventListener("mousemove", e => {
+      for (let i = 0; i < 2; i++) {
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          size: Math.random() * 3 + 1,
+          life: 1.0
+        });
+      }
+    });
+
+    function animateTrail() {
+      tctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+      particles.forEach((p, i) => {
+        p.life -= 0.02;
+        p.size *= 0.97;
+        if (p.life <= 0) particles.splice(i, 1);
+        else {
+          tctx.beginPath();
+          tctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          tctx.fillStyle = `rgba(255,255,255,${p.life})`;
+          tctx.fill();
+        }
+      });
+      requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+  </script>
+</body>
+</html>
