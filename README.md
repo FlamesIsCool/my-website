@@ -1,6 +1,6 @@
 # its me
 
-![Aura Portfolio Screenshot](https://media.discordapp.net/attachments/1418551410802294874/1419134933322170458/image.png?width=560)
+![Aura Portfolio Screenshot](https://media.discordapp.net/attachments/1418551410802294874/1419134933322170458/image.png?ex=68d0a7e6&is=68cf5666&hm=c4485afe525ed7d413c639627efae9179a5d7dd59cff292abd723997e030d136&=&format=webp&quality=lossless&width=1760&height=864)
 
 made this website for fun ;/
 
